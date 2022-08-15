@@ -19,7 +19,7 @@ class HelpCommand : CommandHandler() {
         components.append("/btd at on - 開啟全伺服器生日祝福（預設開啟）\n")
         components.append("/btd gift - 領取生日禮包（預設自動領取，只能領取一次）\n")
 
-        components.append("/btd help - 顯示生日指令幫助列表 (就是此頁面)")
+        components.append("/btd help - 顯示生日指令幫助列表 （就是此頁面）")
 
         sender.spigot().sendMessage(*components.create())
     }

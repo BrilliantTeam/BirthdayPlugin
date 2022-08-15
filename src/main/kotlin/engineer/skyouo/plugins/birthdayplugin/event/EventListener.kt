@@ -29,6 +29,11 @@ class EventListener : Listener {
                     )
                 }
             }
+
+            Util.sendDiscordMessage(
+                event.player.server,
+                ":M8_RICE: 今天是 ${event.player.name} 的生日，祝他生日快樂吧！[ <@982640257340174396> ]"
+            )
         }
     }
 }

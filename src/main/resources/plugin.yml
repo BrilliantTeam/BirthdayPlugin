@@ -7,4 +7,4 @@ description: 輝煌伺服器的生日插件
 website: brilliantw.net
 commands:
   btd:
-    usage: /btd <set/gs/at/gift/help/giftset>
+    usage: /btd <set/gs/at/gift/help>

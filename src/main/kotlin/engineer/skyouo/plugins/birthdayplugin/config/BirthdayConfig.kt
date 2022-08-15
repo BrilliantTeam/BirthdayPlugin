@@ -11,11 +11,21 @@ object BirthdayConfig {
     val giftCommands: MutableList<String>
         get() = configuration.getStringList("gift_commands")
 
+    val discordSrv: Boolean
+        get() = configuration.getBoolean("discord_srv", true)
+
     fun init() {
         if (!configuration.isSet("gift_commands")) {
             configuration.set("gift_commands", listOf("minecraft:give %player% minecraft:diamond 1"))
             configuration.setInlineComments(
                 "gift_commands", arrayListOf("The gift given to the player on his birthday (command)")
+            )
+        }
+
+        if (!configuration.isSet("discord_srv")) {
+            configuration.set("discord_srv", true)
+            configuration.setInlineComments(
+                "discord_srv", arrayListOf("Whether to send the birthday message to the Discord server (discord srv)")
             )
         }
 

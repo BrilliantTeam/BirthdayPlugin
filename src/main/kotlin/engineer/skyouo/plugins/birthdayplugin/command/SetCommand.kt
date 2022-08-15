@@ -9,7 +9,7 @@ import org.bukkit.entity.Player
 class SetCommand : CommandHandler() {
     override fun onCommand(sender: Player, command: Command, label: String, args: Array<String>) {
         if (sender.isOp && args.size == 5) {
-            val player = sender.server.offlinePlayers.find { it.name == args[1] || it.uniqueId.toString() == args[1] }
+            val player = sender.server.onlinePlayers.find { it.name == args[1] || it.uniqueId.toString() == args[1] }
 
             if (player != null) {
                 setBirthday(sender, player, args, 2)
