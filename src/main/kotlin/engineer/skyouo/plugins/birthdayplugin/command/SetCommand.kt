@@ -17,6 +17,9 @@ class SetCommand : CommandHandler() {
                 Util.sendSystemMessage(sender, "找不到此玩家：${args[1]}")
             }
         } else if (args.size == 4) {
+            val oldBirthday = BirthdayStorage.get(sender.uniqueId.toString())
+            if (oldBirthday != null) return Util.sendSystemMessage(sender, "您已經設定過生日了，生日只能設定一次！")
+
             setBirthday(sender, sender, args, 1)
         } else {
             Util.sendSystemMessage(sender, "設定生日失敗，請檢查輸入的日期格式是否正確 (請輸入 [/btd help] 查看用法)")
@@ -38,7 +41,7 @@ class SetCommand : CommandHandler() {
                     return
                 }
 
-                BirthdayStorage.set(player, calendar.time, false)
+                BirthdayStorage.set(player, calendar, false)
                 Util.sendSystemMessage(sender, "成功設定生日，${player.name} 的生日為：$year 年 $month 月 $day 日")
             } catch (e: Exception) {
                 Util.sendSystemMessage(

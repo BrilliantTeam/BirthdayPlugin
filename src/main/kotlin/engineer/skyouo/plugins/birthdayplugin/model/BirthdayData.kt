@@ -1,24 +1,31 @@
 package engineer.skyouo.plugins.birthdayplugin.model
 
-import org.bukkit.Bukkit
-import org.bukkit.OfflinePlayer
+import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
+import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.configuration.serialization.SerializableAs
 import java.util.*
 
-
 @SerializableAs("BirthdayData")
-data class BirthdayData(private val playerUUID: String, val birthday: Date, val receiveGift: Boolean) :
+data class BirthdayData(private val playerUUID: String, val calendar: Calendar, val receiveGift: Boolean) :
     ConfigurationSerializable {
-    val offlinePlayer: OfflinePlayer
-        get() = Bukkit.getOfflinePlayer(UUID.fromString(playerUUID))
-
     override fun serialize(): Map<String, Any> {
         val map = mutableMapOf<String, Any>()
 
         map["player_uuid"] = playerUUID
-        map["birthday"] = birthday.time
+        map["calendar"] = calendar.timeInMillis
         map["receive_gift"] = receiveGift
         return map
+    }
+
+    fun todayIsBirthday(): Boolean {
+        val now = Util.getTaipeiCalendar()
+
+        val isSameMonth = calendar.get(Calendar.MONTH) == now.get(Calendar.MONTH)
+        val isSameDay = calendar.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)
+
+        BirthdayPlugin.LOGGER.info("isSameMonth: $isSameMonth, isSameDay: $isSameDay")
+
+        return isSameMonth && isSameDay
     }
 }

@@ -2,6 +2,9 @@ package engineer.skyouo.plugins.birthdayplugin
 
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
+import engineer.skyouo.plugins.birthdayplugin.event.EventListener
+import engineer.skyouo.plugins.birthdayplugin.model.BirthdayData
+import org.bukkit.configuration.serialization.ConfigurationSerialization
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.logging.Logger
 
@@ -20,6 +23,9 @@ class BirthdayPlugin : JavaPlugin() {
             birthdayCommand.description = "輝煌伺服器生日系統指令 (btd /help)"
             LOGGER.info("Register btd command successful")
         }
+
+        server.pluginManager.registerEvents(EventListener(), this)
+        ConfigurationSerialization.registerClass(BirthdayData::class.java, "BirthdayData")
 
         LOGGER.info("BirthdayPlugin is enabled")
     }

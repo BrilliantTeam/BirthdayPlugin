@@ -4,8 +4,9 @@ import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
 import engineer.skyouo.plugins.birthdayplugin.model.BirthdayData
 import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.OfflinePlayer
+import org.bukkit.configuration.MemorySection
 import org.bukkit.configuration.file.YamlConfiguration
-import java.util.Date
+import java.util.*
 
 object BirthdayStorage {
     private val file = Util.getFileLocation("data.yml")
@@ -15,30 +16,30 @@ object BirthdayStorage {
         return try {
             val data = configuration.get(uuid)
 
-            if (data is Map<*, *>) {
+            if (data is MemorySection) {
+                val calendar = Util.getTaipeiCalendar()
+                calendar.timeInMillis = data.getLong("calendar")
+
                 BirthdayData(
-                    data["player_uuid"] as String,
-                    Date(data["birthday"] as Long),
-                    data["receive_gift"] as Boolean
+                    data.getString("player_uuid", uuid)!!,
+                    calendar,
+                    data.getBoolean("receive_gift")
                 )
             } else {
                 null
             }
         } catch (e: Exception) {
-            BirthdayPlugin.LOGGER.warning("Failed to get birthday data for player:$uuid")
+            BirthdayPlugin.LOGGER.warning("Failed to get birthday data for player:$uuid (${e.message})")
             null
         }
     }
 
-    fun set(player: OfflinePlayer, birthday: Date, receiveGift: Boolean) {
+    fun set(player: OfflinePlayer, calendar: Calendar, receiveGift: Boolean) {
         val uuid = player.uniqueId.toString()
 
-        configuration.set(uuid, BirthdayData(uuid, birthday, receiveGift).serialize())
+        configuration.set(uuid, BirthdayData(uuid, calendar, receiveGift).serialize())
         save()
-    }
-
-    fun getAll() {
-        return configuration.getKeys(false).forEach { get(it) }
+        reload()
     }
 
     fun reload() {

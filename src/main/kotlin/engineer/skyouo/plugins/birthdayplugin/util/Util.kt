@@ -21,7 +21,7 @@ object Util {
         return baseDirectory.resolve(fileName)
     }
 
-    private fun getSystemMessage(message: String): Array<BaseComponent> {
+    fun getSystemMessage(message: String): Array<BaseComponent> {
         return ComponentBuilder(ChatColor.translateAlternateColorCodes('&', "&7[&6系統&7] &f飯娘：&7$message")).create()
     }
 
