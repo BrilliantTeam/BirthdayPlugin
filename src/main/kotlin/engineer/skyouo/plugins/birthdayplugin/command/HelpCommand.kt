@@ -16,7 +16,8 @@ class HelpCommand : CommandHandler() {
         components.append("/btd gs off - 關閉個人生日祝福（預設開啟）\n")
         components.append("/btd gs on - 開啟個人生日祝福（預設開啟）\n")
         components.append("/btd at off - 關閉全伺服器生日祝福（預設開啟）\n")
-        components.append("/btd at on - 開啟全伺服器生日祝福（預設開啟\n")
+        components.append("/btd at on - 開啟全伺服器生日祝福（預設開啟）\n")
+        components.append("/btd gift - 領取生日禮包（預設自動領取，只能領取一次）\n\n")
 
         if (sender.isOp) {
             components.append("/btd giftset <禮包名> - 設置指定的 kit 為預設給予的生日禮包\n")
