@@ -8,9 +8,9 @@ import org.bukkit.entity.Player
 
 class ReloadCommand : CommandHandler() {
     override fun onCommand(sender: Player, command: Command, label: String, args: Array<String>) {
-        Util.sendSystemMessage(sender, "Reloading birthday plugin...")
+        Util.sendSystemMessage(sender, "Reloading birthday plugin config ...")
         BirthdayStorage.reload()
         BirthdayConfig.reload()
-        Util.sendSystemMessage(sender, "Birthday birthday plugin reloaded.")
+        Util.sendSystemMessage(sender, "birthday plugin config reloaded.")
     }
 }

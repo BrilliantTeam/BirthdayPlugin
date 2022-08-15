@@ -6,6 +6,7 @@ import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.OfflinePlayer
 import org.bukkit.configuration.MemorySection
 import org.bukkit.configuration.file.YamlConfiguration
+import java.util.Date
 
 object BirthdayStorage {
     private val file = Util.getFileLocation("data.yml")
@@ -24,7 +25,7 @@ object BirthdayStorage {
                 BirthdayData(
                     data.getString("player_uuid", uuid)!!,
                     calendar,
-                    data.getBoolean("last_receive_gift"),
+                    Date(data.getLong("last_receive_gift")),
                     data.getBoolean("greetings", true),
                     data.getBoolean("announcement", true)
                 )
@@ -58,6 +59,6 @@ object BirthdayStorage {
     }
 
     private fun getDefault(uuid: String): BirthdayData {
-        return BirthdayData(uuid, null, lastReceiveGift = false, greetings = true, announcement = true)
+        return BirthdayData(uuid, null, null, greetings = true, announcement = true)
     }
 }

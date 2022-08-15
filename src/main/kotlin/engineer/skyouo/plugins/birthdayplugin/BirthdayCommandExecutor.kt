@@ -49,9 +49,8 @@ class BirthdayCommandExecutor : TabExecutor {
             BirthdayCommand.Set.command -> SetCommand().onCommand(sender, command, label, args)
             BirthdayCommand.Greetings.command -> SwitchGreetingsCommand().onCommand(sender, command, label, args)
             BirthdayCommand.Announcement.command -> SwitchAnnouncementCommand().onCommand(sender, command, label, args)
-            BirthdayCommand.Gift.command -> {}
+            BirthdayCommand.Gift.command -> GiftCommand().onCommand(sender, command, label, args)
             BirthdayCommand.Help.command -> HelpCommand().onCommand(sender, command, label, args)
-            BirthdayCommand.GiftSet.command -> GiftSetCommand().onCommand(sender, command, label, args)
             BirthdayCommand.Reload.command -> ReloadCommand().onCommand(sender, command, label, args)
             else -> {
                 HelpCommand().onCommand(sender, command, label, args)

@@ -15,6 +15,8 @@ class BirthdayPlugin : JavaPlugin() {
     }
 
     override fun onEnable() {
+        BirthdayConfig.init()
+
         val birthdayCommand = this.getCommand("btd")
         if (birthdayCommand == null) {
             LOGGER.severe("Command btd is not found")

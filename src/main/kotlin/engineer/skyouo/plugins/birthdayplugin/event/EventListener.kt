@@ -16,6 +16,10 @@ class EventListener : Listener {
                 Util.sendSystemMessage(event.player, "&a輝煌伺服器祝您生日快樂！&7（可使用 [/btd gs off] 關閉個人祝福）")
             }
 
+            if (birthday.canGiveGift()) {
+                birthday.giveGift(event.player)
+            }
+
             for (player in event.player.server.onlinePlayers) {
                 val data = BirthdayStorage.get(player)
                 if (data.announcement) {

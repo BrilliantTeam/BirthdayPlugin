@@ -19,10 +19,6 @@ class HelpCommand : CommandHandler() {
         components.append("/btd at on - 開啟全伺服器生日祝福（預設開啟）\n")
         components.append("/btd gift - 領取生日禮包（預設自動領取，只能領取一次）\n")
 
-        if (sender.isOp) {
-            components.append("/btd giftset <禮包名> - 設置指定的 kit 為預設給予的生日禮包\n")
-        }
-
         components.append("/btd help - 顯示生日指令幫助列表 (就是此頁面)")
 
         sender.spigot().sendMessage(*components.create())
