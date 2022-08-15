@@ -11,9 +11,9 @@ object BirthdayStorage {
     private val file = Util.getFileLocation("data.yml")
     private val configuration = YamlConfiguration.loadConfiguration(file)
 
-    fun get(player: OfflinePlayer): BirthdayData? {
+    fun get(uuid: String): BirthdayData? {
         return try {
-            val data = configuration.get(player.uniqueId.toString())
+            val data = configuration.get(uuid)
 
             if (data is Map<*, *>) {
                 BirthdayData(
@@ -25,14 +25,20 @@ object BirthdayStorage {
                 null
             }
         } catch (e: Exception) {
-            BirthdayPlugin.LOGGER.warning("Failed to get birthday data for ${player.name}")
+            BirthdayPlugin.LOGGER.warning("Failed to get birthday data for player:$uuid")
             null
         }
     }
 
-    fun set(player: OfflinePlayer, data: BirthdayData) {
-        configuration.set(player.uniqueId.toString(), data.serialize())
+    fun set(player: OfflinePlayer, birthday: Date, receiveGift: Boolean) {
+        val uuid = player.uniqueId.toString()
+
+        configuration.set(uuid, BirthdayData(uuid, birthday, receiveGift).serialize())
         save()
+    }
+
+    fun getAll() {
+        return configuration.getKeys(false).forEach { get(it) }
     }
 
     fun reload() {

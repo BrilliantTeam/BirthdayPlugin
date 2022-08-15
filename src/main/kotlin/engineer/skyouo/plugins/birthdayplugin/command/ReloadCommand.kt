@@ -2,15 +2,15 @@ package engineer.skyouo.plugins.birthdayplugin.command
 
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
-import org.bukkit.Bukkit
+import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.command.Command
-import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
 class ReloadCommand : CommandHandler() {
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>) {
-        sender.sendMessage("Reloading birthday plugin...")
+    override fun onCommand(sender: Player, command: Command, label: String, args: Array<String>) {
+        Util.sendSystemMessage(sender, "Reloading birthday plugin...")
         BirthdayStorage.reload()
         BirthdayConfig.reload()
-        sender.sendMessage("Birthday birthday plugin reloaded.")
+        Util.sendSystemMessage(sender, "Birthday birthday plugin reloaded.")
     }
 }

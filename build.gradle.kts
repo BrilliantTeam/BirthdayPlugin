@@ -10,8 +10,8 @@ plugins {
     id("dev.s7a.gradle.minecraft.server") version "1.2.0"
 }
 
-group = "engineer.skyouo.plugins"
-version = "1.0.0-1.19"
+group = project.property("group").toString()
+version = project.property("version").toString()
 
 // Define the "bundle" configuration which will be included in the shadow jar.
 val bundle: Configuration by configurations.creating
@@ -29,11 +29,11 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10")?.let { bundle(it) }
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")?.let { bundle(it) }
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.property("kotlin_version")}")?.let { bundle(it) }
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${project.property("kotlin_version")}")?.let { bundle(it) }
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")?.let { bundle(it) }
 
-    compileOnly("org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:${project.property("spigot_version").toString()}")
 }
 
 val targetJavaVersion = 17
@@ -73,14 +73,14 @@ tasks {
         dependsOn(build)
         doFirst {
             copy {
-                from(buildDir.resolve("libs/BirthdayPlugin-$version.jar"))
+                from(buildDir.resolve("libs/${project.property("plugin_name")}-$version.jar"))
                 into(buildDir.resolve("MinecraftServer/plugins"))
             }
         }
 
         // Spigot: https://getbukkit.org/download/spigot
         // Paper: https://github.com/sya-ri/minecraft-server-gradle-plugin
-        jarUrl.set(LaunchMinecraftServerTask.JarUrl.Paper("1.19.2"))
+        jarUrl.set(LaunchMinecraftServerTask.JarUrl.Paper(project.property("mc_version").toString()))
         agreeEula.set(true)
     }
 
@@ -88,7 +88,7 @@ tasks {
         dependsOn(build)
         doFirst {
             copy {
-                from(buildDir.resolve("libs/BirthdayPlugin-$version.jar"))
+                from(buildDir.resolve("libs/${project.property("plugin_name")}-$version.jar"))
                 into(buildDir.resolve("MinecraftServer/plugins"))
             }
         }
