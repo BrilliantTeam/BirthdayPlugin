@@ -7,4 +7,5 @@ enum class BirthdayCommand(val command: String, val admin: Boolean = false) {
     Gift("gift"),
     Help("help"),
     GiftSet("giftset", true),
+    Reload("reload", true),
 }

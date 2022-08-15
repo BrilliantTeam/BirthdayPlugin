@@ -15,6 +15,10 @@ object BirthdayConfig {
             save()
         }
 
+    fun reload() {
+        configuration.load(file)
+    }
+
     fun save() {
         configuration.save(file)
     }
