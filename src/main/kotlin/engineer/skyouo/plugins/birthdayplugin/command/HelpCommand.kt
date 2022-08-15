@@ -1,6 +1,5 @@
 package engineer.skyouo.plugins.birthdayplugin.command
 
-import engineer.skyouo.plugins.birthdayplugin.util.Util
 import net.md_5.bungee.api.chat.ComponentBuilder
 import org.bukkit.command.Command
 import org.bukkit.entity.Player

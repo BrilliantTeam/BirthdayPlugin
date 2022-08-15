@@ -1,6 +1,7 @@
 package engineer.skyouo.plugins.birthdayplugin.command
 
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
+import engineer.skyouo.plugins.birthdayplugin.model.BirthdayData
 import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.OfflinePlayer
 import org.bukkit.command.Command
@@ -17,8 +18,11 @@ class SetCommand : CommandHandler() {
                 Util.sendSystemMessage(sender, "找不到此玩家：${args[1]}")
             }
         } else if (args.size == 4) {
-            val oldBirthday = BirthdayStorage.get(sender.uniqueId.toString())
-            if (oldBirthday != null) return Util.sendSystemMessage(sender, "您已經設定過生日了，生日只能設定一次！")
+            val oldBirthday = BirthdayStorage.get(sender)
+            if (oldBirthday.calendar != null) {
+                Util.sendSystemMessage(sender, "您已經設定過生日了，生日只能設定一次！")
+                return
+            }
 
             setBirthday(sender, sender, args, 1)
         } else {
@@ -41,7 +45,13 @@ class SetCommand : CommandHandler() {
                     return
                 }
 
-                BirthdayStorage.set(player, calendar, false)
+
+                val oldData = BirthdayStorage.get(player)
+
+                BirthdayStorage.set(
+                    player,
+                    oldData.copy(calendar = calendar)
+                )
                 Util.sendSystemMessage(sender, "成功設定生日，${player.name} 的生日為：$year 年 $month 月 $day 日")
             } catch (e: Exception) {
                 Util.sendSystemMessage(

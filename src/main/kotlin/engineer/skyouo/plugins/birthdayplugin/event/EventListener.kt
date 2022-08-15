@@ -9,13 +9,22 @@ import org.bukkit.event.player.PlayerJoinEvent
 class EventListener : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
-        val birthday = BirthdayStorage.get(event.player.uniqueId.toString())
+        val birthday = BirthdayStorage.get(event.player)
 
-        if (birthday != null && birthday.todayIsBirthday()) {
-            Util.sendSystemMessage(event.player, "&a輝煌伺服器祝您生日快樂！&7（可使用 [/btd gs off] 關閉個人祝福）")
+        if (birthday.todayIsBirthday()) {
+            if (birthday.greetings) {
+                Util.sendSystemMessage(event.player, "&a輝煌伺服器祝您生日快樂！&7（可使用 [/btd gs off] 關閉個人祝福）")
+            }
 
-            event.player.server.consoleSender.spigot()
-                .sendMessage(*Util.getSystemMessage("&6今天是 &a${event.player.name} &6的生日，祝他生日快樂吧！&7（可使用 [/btd at off] 關閉全伺服器祝福）"))
+            for (player in event.player.server.onlinePlayers) {
+                val data = BirthdayStorage.get(player)
+                if (data.announcement) {
+                    Util.sendSystemMessage(
+                        player,
+                        "&6今天是 &a${event.player.name} &6的生日，祝他生日快樂吧！&7（可使用 [/btd at off] 關閉全伺服器祝福）"
+                    )
+                }
+            }
         }
     }
 }

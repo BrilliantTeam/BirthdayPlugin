@@ -1,9 +1,6 @@
 package engineer.skyouo.plugins.birthdayplugin
 
-import engineer.skyouo.plugins.birthdayplugin.command.GiftSetCommand
-import engineer.skyouo.plugins.birthdayplugin.command.HelpCommand
-import engineer.skyouo.plugins.birthdayplugin.command.ReloadCommand
-import engineer.skyouo.plugins.birthdayplugin.command.SetCommand
+import engineer.skyouo.plugins.birthdayplugin.command.*
 import engineer.skyouo.plugins.birthdayplugin.model.BirthdayCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -22,7 +19,7 @@ class BirthdayCommandExecutor : TabExecutor {
             2 -> {
                 val commands = when (args.first()) {
                     BirthdayCommand.Greetings.command -> mutableListOf("on", "off")
-                    BirthdayCommand.At.command -> mutableListOf("on", "off")
+                    BirthdayCommand.Announcement.command -> mutableListOf("on", "off")
                     BirthdayCommand.Set.command -> {
                         if (!sender.isOp) return mutableListOf()
 
@@ -50,8 +47,8 @@ class BirthdayCommandExecutor : TabExecutor {
 
         when (args.first()) {
             BirthdayCommand.Set.command -> SetCommand().onCommand(sender, command, label, args)
-            BirthdayCommand.Greetings.command -> {}
-            BirthdayCommand.At.command -> {}
+            BirthdayCommand.Greetings.command -> SwitchGreetingsCommand().onCommand(sender, command, label, args)
+            BirthdayCommand.Announcement.command -> SwitchAnnouncementCommand().onCommand(sender, command, label, args)
             BirthdayCommand.Gift.command -> {}
             BirthdayCommand.Help.command -> HelpCommand().onCommand(sender, command, label, args)
             BirthdayCommand.GiftSet.command -> GiftSetCommand().onCommand(sender, command, label, args)
