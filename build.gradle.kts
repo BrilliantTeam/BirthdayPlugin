@@ -1,4 +1,3 @@
-import dev.s7a.gradle.minecraft.server.MinecraftServerConfig
 import dev.s7a.gradle.minecraft.server.tasks.LaunchMinecraftServerTask
 
 plugins {
@@ -30,8 +29,8 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.property("kotlin_version")}")?.let { bundle(it) }
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${project.property("kotlin_version")}")?.let { bundle(it) }
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")?.let { bundle(it) }
+    // implementation("org.jetbrains.kotlin:kotlin-reflect:${project.property("kotlin_version")}")?.let { bundle(it) }
+    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")?.let { bundle(it) }
 
     compileOnly("org.spigotmc:spigot-api:${project.property("spigot_version").toString()}")
 }
