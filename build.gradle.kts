@@ -1,12 +1,17 @@
+import dev.s7a.gradle.minecraft.server.MinecraftServerConfig
+import dev.s7a.gradle.minecraft.server.tasks.LaunchMinecraftServerTask
+
 plugins {
     java
     idea
     id("org.jetbrains.kotlin.jvm") version "1.7.10"
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    // https://github.com/sya-ri/minecraft-server-gradle-plugin
+    id("dev.s7a.gradle.minecraft.server") version "1.2.0"
 }
 
 group = "engineer.skyouo.plugins"
-version = "1.0-SNAPSHOT"
+version = "1.0.0-1.19"
 
 // Define the "bundle" configuration which will be included in the shadow jar.
 val bundle: Configuration by configurations.creating
@@ -50,15 +55,44 @@ tasks {
     }
 
     jar {
+        archiveClassifier.set("source")
         from(rootProject.file("LICENSE"))
     }
 
     shadowJar {
-        archiveClassifier.set("shadow")
+        archiveClassifier.set("")
         // Include our bundle configuration in the shadow jar.
         configurations = listOf(bundle)
     }
 
+    build {
+        dependsOn(shadowJar)
+    }
+
+    task<LaunchMinecraftServerTask>("buildAndLaunchServer") {
+        dependsOn(build)
+        doFirst {
+            copy {
+                from(buildDir.resolve("libs/BirthdayPlugin-$version.jar"))
+                into(buildDir.resolve("MinecraftServer/plugins"))
+            }
+        }
+
+        // Spigot: https://getbukkit.org/download/spigot
+        // Paper: https://github.com/sya-ri/minecraft-server-gradle-plugin
+        jarUrl.set(LaunchMinecraftServerTask.JarUrl.Paper("1.19.2"))
+        agreeEula.set(true)
+    }
+
+    task("reloadPluginJar") {
+        dependsOn(build)
+        doFirst {
+            copy {
+                from(buildDir.resolve("libs/BirthdayPlugin-$version.jar"))
+                into(buildDir.resolve("MinecraftServer/plugins"))
+            }
+        }
+    }
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
