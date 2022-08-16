@@ -14,9 +14,6 @@ class EventListener : Listener {
     fun onPlayerJoin(event: PlayerJoinEvent) {
         MinecraftAsynchronouslyTask({
             val player = event.player
-
-            BirthdayPlugin.LOGGER.info("${player.name} aaa joined")
-            BirthdayPlugin.LOGGER.info("${player.name} aaa joined")
             val birthday = BirthdayStorage.get(player)
 
             if (birthday.todayIsBirthday()) {
