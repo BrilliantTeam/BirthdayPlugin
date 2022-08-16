@@ -9,10 +9,10 @@ import org.bukkit.command.CommandSender
 class ReloadCommand : CommandHandler() {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>) {
         if (sender.isOp) {
-            Util.sendSystemMessage(sender, "Reloading birthday plugin config ...")
+            Util.sendSystemMessage(sender, "&7正在重新加載生日插件配置...")
             BirthdayStorage.reload()
             BirthdayConfig.reload()
-            Util.sendSystemMessage(sender, "birthday plugin config reloaded.")
+            Util.sendSystemMessage(sender, "&7重新加載生日插件配置完畢！")
         } else {
             Util.sendSystemMessage(sender, "&c您沒有權限執行此指令")
         }
