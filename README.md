@@ -30,6 +30,6 @@ File location: `build/libs/...`
 
 ## 🟠 Precautions | 注意事項
 
-**The preceding plugins are PlaceholderAPI**
+**The preceding plugins are PlaceholderAPI and DiscordSRV**
 
-**PlaceholderAPI為其前置插件**
+**PlaceholderAPI 與 DiscordSRV 為其前置插件**
