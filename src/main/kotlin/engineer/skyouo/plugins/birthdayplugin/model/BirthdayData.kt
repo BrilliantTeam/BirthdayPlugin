@@ -74,6 +74,6 @@ data class BirthdayData(
         }
         BirthdayStorage.set(player, copy(lastReceiveGift = Date()))
 
-        Util.sendSystemMessage(player, "&a生日快樂！這是您的生日禮物 ._.")
+        Util.sendSystemMessage(player, "&a生日快樂！這是您的生日禮物 :D")
     }
 }
