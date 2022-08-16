@@ -10,7 +10,7 @@ import java.util.Date
 
 object BirthdayStorage {
     private val file = Util.getFileLocation("data.yml")
-    private val configuration = YamlConfiguration.loadConfiguration(file)
+    private var configuration = YamlConfiguration.loadConfiguration(file)
 
     fun get(player: OfflinePlayer): BirthdayData {
         val uuid = player.uniqueId.toString()
@@ -21,6 +21,7 @@ object BirthdayStorage {
             if (data is MemorySection) {
                 val calendar = Util.getTaipeiCalendar()
                 val timestamp = data.getLong("calendar")
+                
                 if (timestamp == 0L) return setDefault(player)
 
                 calendar.timeInMillis = timestamp
@@ -50,7 +51,7 @@ object BirthdayStorage {
     }
 
     fun reload() {
-        configuration.load(file)
+        configuration = YamlConfiguration.loadConfiguration(file)
     }
 
     fun save() {
