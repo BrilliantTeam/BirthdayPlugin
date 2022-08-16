@@ -10,7 +10,7 @@ import java.util.Date
 
 object BirthdayStorage {
     private val file = Util.getFileLocation("data.yml")
-    private var configuration = YamlConfiguration.loadConfiguration(file)
+    private val configuration = YamlConfiguration.loadConfiguration(file)
 
     fun get(player: OfflinePlayer): BirthdayData {
         val uuid = player.uniqueId.toString()
@@ -20,7 +20,10 @@ object BirthdayStorage {
 
             if (data is MemorySection) {
                 val calendar = Util.getTaipeiCalendar()
-                calendar.timeInMillis = data.getLong("calendar")
+                val timestamp = data.getLong("calendar")
+                if (timestamp == 0L) return setDefault(player)
+
+                calendar.timeInMillis = timestamp
 
                 BirthdayData(
                     data.getString("player_uuid", uuid)!!,
@@ -30,15 +33,11 @@ object BirthdayStorage {
                     data.getBoolean("announcement", true)
                 )
             } else {
-                val default = getDefault(uuid)
-                set(player, default)
-                default
+                setDefault(player)
             }
         } catch (e: Exception) {
             BirthdayPlugin.LOGGER.warning("Failed to get birthday data for player:$uuid (${e.message})")
-            val default = getDefault(uuid)
-            set(player, default)
-            default
+            setDefault(player)
         }
     }
 
@@ -51,14 +50,16 @@ object BirthdayStorage {
     }
 
     fun reload() {
-        configuration = YamlConfiguration.loadConfiguration(file)
+        configuration.load(file)
     }
 
     fun save() {
         configuration.save(file)
     }
 
-    private fun getDefault(uuid: String): BirthdayData {
-        return BirthdayData(uuid, null, null, greetings = true, announcement = true)
+    private fun setDefault(player: OfflinePlayer): BirthdayData {
+        val default = BirthdayData(player.uniqueId.toString(), null, null, greetings = true, announcement = true)
+        set(player, default)
+        return default
     }
 }

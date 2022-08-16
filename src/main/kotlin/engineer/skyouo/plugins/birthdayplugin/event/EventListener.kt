@@ -45,7 +45,7 @@ class EventListener : Listener {
                     player.server,
                     Util.replacePlaceholders(
                         player,
-                        ":M8_RICE: `今天是 %playerTitle_use% %essentials_nickname% 的生日，祝他生日快樂吧！`"
+                        ":M8_RICE: ` 今天是 %playerTitle_use% %essentials_nickname% 的生日，祝他生日快樂吧！ `"
                     )
                 )
             }

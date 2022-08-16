@@ -85,6 +85,7 @@ tasks {
         // Paper: https://github.com/sya-ri/minecraft-server-gradle-plugin
         jarUrl.set(LaunchMinecraftServerTask.JarUrl.Paper(project.property("mc_version").toString()))
         agreeEula.set(true)
+        jvmArgument.set(arrayListOf("-Deditable.java.test.console=true"))
     }
 
     task("reloadPluginJar") {
