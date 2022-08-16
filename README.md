@@ -32,4 +32,4 @@ File location: `build/libs/...`
 
 **The preceding plugins are PlaceholderAPI**
 
-**PlaceholderAPI為其前置插件*
+**PlaceholderAPI為其前置插件**
