@@ -36,7 +36,7 @@ object Util {
 
     fun sendDiscordMessage(server: Server, message: String) {
         if (BirthdayConfig.discordSrv) {
-            server.dispatchCommand(server.consoleSender, "discordsrv bcast `$message`")
+            server.dispatchCommand(server.consoleSender, "discordsrv bcast $message")
         }
     }
 
