@@ -61,7 +61,7 @@ data class BirthdayData(
     fun giveGift(player: Player) {
         val giftCommands = BirthdayConfig.giftCommands
 
-        if (!Util.hasAvailableSlot(player, giftCommands.size)) {
+        if (!Util.hasAvailableSlot(player, giftCommands.filter { it.contains("minecraft:give") }.size)) {
             Util.sendSystemMessage(
                 player,
                 "&c您的背包滿了，我不能給您生日禮物 ._.，整理出空間後請使用 [/btd gift] 領取~"

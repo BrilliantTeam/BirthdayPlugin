@@ -50,7 +50,7 @@ object Util {
         val inventory: Inventory = player.inventory
         var empty = 0
 
-        for (item in inventory.contents) {
+        for (item in inventory.storageContents) {
             if (item == null) {
                 empty++
             }
