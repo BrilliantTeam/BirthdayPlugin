@@ -3,10 +3,13 @@ package engineer.skyouo.plugins.birthdayplugin.command
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
 import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.command.Command
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class SwitchGreetingsCommand : CommandHandler() {
-    override fun onCommand(sender: Player, command: Command, label: String, args: Array<String>) {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>) {
+        if (sender !is Player) return Util.sendSystemMessage(sender, "&c此指令只能在遊戲內使用")
+
         val value = args.getOrNull(1)
         val birthday = BirthdayStorage.get(sender)
 

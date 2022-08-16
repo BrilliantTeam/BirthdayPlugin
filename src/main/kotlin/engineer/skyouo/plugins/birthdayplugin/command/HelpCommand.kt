@@ -2,10 +2,10 @@ package engineer.skyouo.plugins.birthdayplugin.command
 
 import net.md_5.bungee.api.chat.ComponentBuilder
 import org.bukkit.command.Command
-import org.bukkit.entity.Player
+import org.bukkit.command.CommandSender
 
 class HelpCommand : CommandHandler() {
-    override fun onCommand(sender: Player, command: Command, label: String, args: Array<String>) {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>) {
         val components = ComponentBuilder()
         if (sender.isOp) {
             components.append("/btd set <ID> <YYYY> <MM> <DD> - 設定指定玩家的生日\n")

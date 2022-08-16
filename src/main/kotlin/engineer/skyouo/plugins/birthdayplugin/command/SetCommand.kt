@@ -5,10 +5,13 @@ import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
 import org.bukkit.command.Command
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class SetCommand : CommandHandler() {
-    override fun onCommand(sender: Player, command: Command, label: String, args: Array<String>) {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>) {
+        if (sender !is Player) return Util.sendSystemMessage(sender, "&c此指令只能在遊戲內使用")
+
         if (sender.isOp && args.size == 5) {
             val player = sender.server.offlinePlayers.find { it.name == args[1] || it.uniqueId.toString() == args[1] }
 

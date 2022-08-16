@@ -39,7 +39,6 @@ class BirthdayCommandExecutor : TabExecutor {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
-        if (sender !is Player) return true
         if (args.isEmpty()) {
             HelpCommand().onCommand(sender, command, label, args)
             return true

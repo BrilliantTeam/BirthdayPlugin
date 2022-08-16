@@ -21,9 +21,8 @@ object BirthdayStorage {
             if (data is MemorySection) {
                 val calendar = Util.getTaipeiCalendar()
                 val timestamp = data.getLong("calendar")
-                
-                if (timestamp == 0L) return setDefault(player)
 
+                if (timestamp == 0L) return setDefault(player)
                 calendar.timeInMillis = timestamp
 
                 BirthdayData(

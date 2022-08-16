@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
 import org.bukkit.ChatColor
 import org.bukkit.Server
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import java.io.File
@@ -30,8 +31,8 @@ object Util {
         return ComponentBuilder(ChatColor.translateAlternateColorCodes('&', "&7[&6系統&7] &f飯娘：&7$message")).create()
     }
 
-    fun sendSystemMessage(player: Player, message: String) {
-        player.spigot().sendMessage(*getSystemMessage(message))
+    fun sendSystemMessage(sender: CommandSender, message: String) {
+        sender.spigot().sendMessage(*getSystemMessage(message))
     }
 
     fun sendDiscordMessage(server: Server, message: String) {

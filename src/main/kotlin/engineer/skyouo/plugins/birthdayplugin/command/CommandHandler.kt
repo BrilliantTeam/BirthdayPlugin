@@ -1,10 +1,10 @@
 package engineer.skyouo.plugins.birthdayplugin.command
 
 import org.bukkit.command.Command
-import org.bukkit.entity.Player
+import org.bukkit.command.CommandSender
 
 abstract class CommandHandler {
     abstract fun onCommand(
-        sender: Player, command: Command, label: String, args: Array<String>
+        sender: CommandSender, command: Command, label: String, args: Array<String>
     )
 }
