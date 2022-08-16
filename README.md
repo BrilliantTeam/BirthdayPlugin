@@ -5,7 +5,6 @@
 [Made for Brilliantw Server](https://discord.gg/5MHGpAFGEN "The Copyright of the entire source codes is owned by SiongSng according to Article 10 the Copyright Law of the Republic of China.")  
 
 輝煌伺服器中祝福玩家生日的生日插件  
-需要 **Placeholder API** 前置插件
 
 ## 📃 License | 開源授權
 
@@ -28,3 +27,9 @@ File location: `build/libs/...`
 ```shell
 ./gradle buildAndLaunchServer
 ```
+
+## 🟠 Precautions | 注意事項
+
+**The preceding plugins are PlaceholderAPI**
+
+**PlaceholderAPI為其前置插件*
