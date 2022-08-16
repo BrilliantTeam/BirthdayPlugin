@@ -38,7 +38,7 @@ class EventListener : Listener {
                             onlinePlayer,
                             Util.replacePlaceholders(
                                 player,
-                                "&6今天是 [%playerTitle_use%] &a%essentials_nickname% &6的生日，祝他生日快樂吧！&7（可使用 [/btd at off] 關閉全伺服器祝福）"
+                                "&6今天是 %playerTitle_use% &a%essentials_nickname% &6的生日，祝他生日快樂吧！&7（可使用 [/btd at off] 關閉全伺服器祝福）"
                             )
                         )
                     }
@@ -48,7 +48,7 @@ class EventListener : Listener {
                     player.server,
                     Util.replacePlaceholders(
                         player,
-                        ":M8_RICE: 今天是 [%playerTitle_use%] %essentials_nickname% 的生日，祝他生日快樂吧！"
+                        ":M8_RICE: 今天是 %playerTitle_use% %essentials_nickname% 的生日，祝他生日快樂吧！"
                     )
                 )
             }
