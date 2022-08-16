@@ -23,7 +23,7 @@ class BirthdayCommandExecutor : TabExecutor {
                     BirthdayCommand.Set.command -> {
                         if (!sender.isOp) return mutableListOf()
 
-                        sender.server.offlinePlayers.map { it.name ?: it.uniqueId.toString() }
+                        sender.server.onlinePlayers.map { it.name }
                     }
 
                     else -> mutableListOf()

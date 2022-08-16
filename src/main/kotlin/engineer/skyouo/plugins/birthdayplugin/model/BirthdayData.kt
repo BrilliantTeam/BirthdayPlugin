@@ -3,6 +3,7 @@ package engineer.skyouo.plugins.birthdayplugin.model
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
 import engineer.skyouo.plugins.birthdayplugin.util.Util
+import org.bukkit.Bukkit
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.configuration.serialization.SerializableAs
 import org.bukkit.entity.Player
@@ -45,8 +46,9 @@ data class BirthdayData(
         return isSameMonth && isSameDay
     }
 
-    fun canGiveGift(): Boolean {
+    fun canGiveGift(isOp: Boolean): Boolean {
         return if (todayIsBirthday()) {
+            if (isOp) return true
             val yesterday = Date()
             yesterday.time -= 24 * 60 * 60 * 1000
 
@@ -59,18 +61,16 @@ data class BirthdayData(
     fun giveGift(player: Player) {
         val giftCommands = BirthdayConfig.giftCommands
 
-        val emptySpace = player.inventory.maxStackSize - player.inventory.size
-
-        if (emptySpace < giftCommands.size) {
+        if (!Util.hasAvailableSlot(player, giftCommands.size)) {
             Util.sendSystemMessage(
                 player,
-                "&c您的背包滿了，我不能給您生日禮物 ._.，請空出 ${giftCommands.size - emptySpace} 格空間後請使用 [/btd gift] 領取~"
+                "&c您的背包滿了，我不能給您生日禮物 ._.，整理出空間後請使用 [/btd gift] 領取~"
             )
             return
         }
 
         for (giftCommand in giftCommands) {
-            player.server.dispatchCommand(player.server.consoleSender, giftCommand.replace("%player%", player.name))
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), giftCommand.replace("%player%", player.name))
         }
         BirthdayStorage.set(player, copy(lastReceiveGift = Date()))
 

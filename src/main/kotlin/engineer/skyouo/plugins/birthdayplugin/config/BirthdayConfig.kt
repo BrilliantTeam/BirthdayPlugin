@@ -14,6 +14,9 @@ object BirthdayConfig {
     val discordSrv: Boolean
         get() = configuration.getBoolean("discord_srv", true)
 
+    val joinServerGiftDelay: Int
+        get() = configuration.getInt("join_server_gift_delay", 0)
+
     fun init() {
         if (!configuration.isSet("gift_commands")) {
             configuration.set("gift_commands", listOf("minecraft:give %player% minecraft:diamond 1"))
@@ -26,6 +29,14 @@ object BirthdayConfig {
             configuration.set("discord_srv", true)
             configuration.setInlineComments(
                 "discord_srv", arrayListOf("Whether to send the birthday message to the Discord server (discord srv)")
+            )
+        }
+
+        if (!configuration.isSet("join_server_gift_delay")) {
+            configuration.set("join_server_gift_delay", 0)
+            configuration.setInlineComments(
+                "join_server_gift_delay",
+                arrayListOf("The delay in seconds before the join server birthday gift is given")
             )
         }
 

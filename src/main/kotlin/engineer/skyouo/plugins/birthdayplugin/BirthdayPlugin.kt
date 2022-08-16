@@ -4,7 +4,9 @@ import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
 import engineer.skyouo.plugins.birthdayplugin.event.EventListener
 import engineer.skyouo.plugins.birthdayplugin.model.BirthdayData
+import org.bukkit.Bukkit
 import org.bukkit.configuration.serialization.ConfigurationSerialization
+import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.logging.Logger
 
@@ -12,10 +14,16 @@ import java.util.logging.Logger
 class BirthdayPlugin : JavaPlugin() {
     companion object {
         val LOGGER: Logger = Logger.getLogger("BirthdayPlugin")
+        lateinit var INSTANCE: Plugin
     }
 
     override fun onEnable() {
+        INSTANCE = this
         BirthdayConfig.init()
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            LOGGER.severe("This plugin requires PlaceholderAPI to work!")
+        }
 
         val birthdayCommand = this.getCommand("btd")
         if (birthdayCommand == null) {

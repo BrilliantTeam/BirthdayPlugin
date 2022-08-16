@@ -8,3 +8,5 @@ website: brilliantw.net
 commands:
   btd:
     usage: /btd <set/gs/at/gift/help>
+
+depend: [PlaceholderAPI]

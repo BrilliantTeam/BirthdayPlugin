@@ -1,11 +1,14 @@
 package engineer.skyouo.plugins.birthdayplugin.util
 
+import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
+import me.clip.placeholderapi.PlaceholderAPI
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
 import org.bukkit.ChatColor
 import org.bukkit.Server
 import org.bukkit.entity.Player
+import org.bukkit.inventory.Inventory
 import java.io.File
 import java.util.*
 
@@ -41,5 +44,27 @@ object Util {
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Taipei"))
         calendar.time = Date()
         return calendar
+    }
+
+    fun hasAvailableSlot(player: Player, count: Int): Boolean {
+        val inventory: Inventory = player.inventory
+        var empty = 0
+
+        for (item in inventory.contents) {
+            if (item == null) {
+                empty++
+            }
+        }
+
+        return empty >= count
+    }
+
+    fun replacePlaceholders(player: Player, text: String): String {
+        return try {
+            PlaceholderAPI.setPlaceholders(player, text)
+        } catch (e: Exception) {
+            BirthdayPlugin.LOGGER.severe("Failed to replace placeholders")
+            text
+        }
     }
 }

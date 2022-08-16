@@ -10,13 +10,17 @@ class GiftCommand : CommandHandler() {
         val birthday = BirthdayStorage.get(sender)
 
         if (birthday.todayIsBirthday()) {
-            if (birthday.canGiveGift()) {
+            if (birthday.canGiveGift(sender.isOp)) {
                 birthday.giveGift(sender)
             } else {
                 Util.sendSystemMessage(sender, "&c您已經領取過生日禮包囉~")
             }
         } else {
-            Util.sendSystemMessage(sender, "&c領取生日禮包失敗，今天不是您的生日喔~")
+            if (birthday.calendar != null) {
+                Util.sendSystemMessage(sender, "&c領取生日禮包失敗，今天不是您的生日喔~")
+            } else {
+                Util.sendSystemMessage(sender, "&c領取生日禮包失敗，您尚未設定生日")
+            }
         }
     }
 }
