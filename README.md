@@ -2,7 +2,7 @@
 
 ---
 
-[Made for Brilliantw Server](https://discord.gg/5MHGpAFGEN "The Copyright of the entire source codes is owned by SiongSng according to Article 10 the Copyright Law of the Republic of China.")  
+[Made for Brilliant Team](https://discord.gg/5MHGpAFGEN "The Copyright of the entire source codes is owned by SiongSng according to Article 10 the Copyright Law of the Republic of China.")  
 
 輝煌伺服器中祝福玩家生日並給予生日禮物的插件 
 
