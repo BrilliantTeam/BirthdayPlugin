@@ -19,19 +19,7 @@ object BirthdayStorage {
             val data = configuration.get(uuid)
 
             if (data is MemorySection) {
-                val calendar = Util.getTaipeiCalendar()
-                val timestamp = data.getLong("calendar")
-
-                if (timestamp == 0L) return setDefault(player)
-                calendar.timeInMillis = timestamp
-
-                BirthdayData(
-                    data.getString("player_uuid", uuid)!!,
-                    calendar,
-                    Date(data.getLong("last_receive_gift")),
-                    data.getBoolean("greetings", true),
-                    data.getBoolean("announcement", true)
-                )
+                BirthdayData.deserialize(data) ?: setDefault(player)
             } else {
                 setDefault(player)
             }
@@ -39,6 +27,16 @@ object BirthdayStorage {
             BirthdayPlugin.LOGGER.warning("Failed to get birthday data for player:$uuid (${e.message})")
             setDefault(player)
         }
+    }
+
+    fun getByIp(ip: String): BirthdayData? {
+        val dataList = configuration.getValues(false)
+        val result = dataList.filter { it.value is MemorySection }.map { it.value as MemorySection }
+            .firstOrNull { it.getString("last_receive_ip") == ip }
+
+        BirthdayPlugin.LOGGER.info(result.toString())
+
+        return result?.let { BirthdayData.deserialize(it) }
     }
 
     fun set(player: OfflinePlayer, data: BirthdayData) {
@@ -58,7 +56,7 @@ object BirthdayStorage {
     }
 
     private fun setDefault(player: OfflinePlayer): BirthdayData {
-        val default = BirthdayData(player.uniqueId.toString(), null, null, greetings = true, announcement = true)
+        val default = BirthdayData(player.uniqueId.toString(), null, null, null, greetings = true, announcement = true)
         set(player, default)
         return default
     }

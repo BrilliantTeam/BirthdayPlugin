@@ -14,7 +14,7 @@ class GiftCommand : CommandHandler() {
 
         if (birthday.todayIsBirthday()) {
             if (birthday.canGiveGift(sender.isOp)) {
-                birthday.giveGift(sender)
+                birthday.giveGift(sender, false)
             } else {
                 Util.sendSystemMessage(sender, "&c您已經領取過生日禮包囉~")
             }

@@ -1,9 +1,11 @@
 package engineer.skyouo.plugins.birthdayplugin.model
 
+import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
 import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
 import engineer.skyouo.plugins.birthdayplugin.util.Util
 import org.bukkit.Bukkit
+import org.bukkit.configuration.MemorySection
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.configuration.serialization.SerializableAs
 import org.bukkit.entity.Player
@@ -14,9 +16,29 @@ data class BirthdayData(
     private val playerUUID: String,
     val calendar: Calendar?,
     val lastReceiveGift: Date?,
+    val lastReceiveIp: String?,
     val greetings: Boolean,
     val announcement: Boolean
 ) : ConfigurationSerializable {
+    companion object {
+        fun deserialize(section: MemorySection): BirthdayData? {
+            val calendar = Util.getTaipeiCalendar()
+            val timestamp = section.getLong("calendar")
+
+            if (timestamp == 0L) return null
+            calendar.timeInMillis = timestamp
+
+            return BirthdayData(
+                section.getString("player_uuid")!!,
+                calendar,
+                Date(section.getLong("last_receive_gift")),
+                section.getString("last_receive_ip"),
+                section.getBoolean("greetings", true),
+                section.getBoolean("announcement", true)
+            )
+        }
+    }
+
     override fun serialize(): Map<String, Any> {
         val map = mutableMapOf<String, Any>()
 
@@ -27,6 +49,9 @@ data class BirthdayData(
         }
         if (lastReceiveGift != null) {
             map["last_receive_gift"] = lastReceiveGift.time
+        }
+        if (lastReceiveIp != null) {
+            map["last_receive_ip"] = lastReceiveIp
         }
 
         map["greetings"] = greetings
@@ -58,8 +83,14 @@ data class BirthdayData(
         }
     }
 
-    fun giveGift(player: Player) {
+    fun giveGift(player: Player, autoGift: Boolean) {
         val giftCommands = BirthdayConfig.giftCommands
+
+
+        if (!autoGift && receivedGift(player)) {
+            Util.sendSystemMessage(player, "&c您已經領取過生日禮物囉，別想用一些小技巧來重複領取！")
+            return
+        }
 
         if (!Util.hasAvailableSlot(player, giftCommands.filter { it.contains("minecraft:give") }.size)) {
             Util.sendSystemMessage(
@@ -72,8 +103,24 @@ data class BirthdayData(
         for (giftCommand in giftCommands) {
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), giftCommand.replace("%player%", player.name))
         }
-        BirthdayStorage.set(player, copy(lastReceiveGift = Date()))
+        BirthdayStorage.set(player, copy(lastReceiveGift = Date(), lastReceiveIp = player.address?.address?.hostAddress))
 
         Util.sendSystemMessage(player, "&a生日快樂！這是您的生日禮物 :D")
+    }
+
+    private fun receivedGift(player: Player): Boolean {
+        val data = player.address?.address?.hostAddress?.let { BirthdayStorage.getByIp(it) }
+        BirthdayPlugin.LOGGER.info(data.toString())
+        val lastReceiveGift = data?.lastReceiveGift
+
+        return if (lastReceiveGift != null) {
+            val lastYear = Util.getTaipeiCalendar().apply {
+                add(Calendar.YEAR, -1)
+            }
+
+            lastReceiveGift.after(lastYear.time)
+        } else {
+            false
+        }
     }
 }

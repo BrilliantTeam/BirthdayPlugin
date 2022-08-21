@@ -25,7 +25,7 @@ class EventListener : Listener {
                 }
 
                 if (birthday.canGiveGift(player.isOp)) {
-                    birthday.giveGift(player)
+                    birthday.giveGift(player, true)
                 }
 
                 for (onlinePlayer in player.server.onlinePlayers) {
