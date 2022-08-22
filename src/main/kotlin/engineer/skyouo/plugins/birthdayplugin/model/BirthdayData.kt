@@ -87,8 +87,10 @@ data class BirthdayData(
         val giftCommands = BirthdayConfig.giftCommands
 
 
-        if (!autoGift && receivedGift(player)) {
-            Util.sendSystemMessage(player, "&c您已經領取過生日禮物囉，別想用一些小技巧來重複領取！")
+        if (receivedGift(player)) {
+            if (!autoGift) {
+                Util.sendSystemMessage(player, "&c您已經領取過生日禮物囉，別想用一些小技巧來重複領取！")
+            }
             return
         }
 
@@ -103,14 +105,16 @@ data class BirthdayData(
         for (giftCommand in giftCommands) {
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), giftCommand.replace("%player%", player.name))
         }
-        BirthdayStorage.set(player, copy(lastReceiveGift = Date(), lastReceiveIp = player.address?.address?.hostAddress))
+        BirthdayStorage.set(
+            player,
+            copy(lastReceiveGift = Date(), lastReceiveIp = player.address?.address?.hostAddress)
+        )
 
         Util.sendSystemMessage(player, "&a生日快樂！這是您的生日禮物 :D")
     }
 
     private fun receivedGift(player: Player): Boolean {
         val data = player.address?.address?.hostAddress?.let { BirthdayStorage.getByIp(it) }
-        BirthdayPlugin.LOGGER.info(data.toString())
         val lastReceiveGift = data?.lastReceiveGift
 
         return if (lastReceiveGift != null) {

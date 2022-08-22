@@ -34,8 +34,6 @@ object BirthdayStorage {
         val result = dataList.filter { it.value is MemorySection }.map { it.value as MemorySection }
             .firstOrNull { it.getString("last_receive_ip") == ip }
 
-        BirthdayPlugin.LOGGER.info(result.toString())
-
         return result?.let { BirthdayData.deserialize(it) }
     }
 
