@@ -1,6 +1,5 @@
 package tw.brilliant.server.plugins.birthdayplugin.event
 
-import tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
 import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayConfig
 import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayStorage
 import tw.brilliant.server.plugins.birthdayplugin.util.MinecraftAsynchronouslyTask
@@ -20,7 +19,7 @@ class EventListener : Listener {
                 if (birthday.greetings) {
                     Util.sendSystemMessage(
                         player,
-                        "&a輝煌伺服器祝您生日快樂！&7（可使用 [/btd gs off] 關閉個人祝福）"
+                        BirthdayConfig.personalGreetingsMessage
                     )
                 }
 
@@ -35,7 +34,7 @@ class EventListener : Listener {
                             onlinePlayer,
                             Util.replacePlaceholders(
                                 player,
-                                "&6今天是 %playerTitle_use% &a%essentials_nickname% &6的生日，祝他生日快樂吧！&7（可使用 [/btd at off] 關閉全伺服器祝福）"
+                                BirthdayConfig.serverAnnouncementMessage
                             )
                         )
                     }
@@ -45,7 +44,7 @@ class EventListener : Listener {
                     player.server,
                     Util.replacePlaceholders(
                         player,
-                        ":M8_RICE:` 今天是 %playerTitle_use% %essentials_nickname% 的生日，祝他生日快樂吧！ `"
+                        BirthdayConfig.serverAnnouncementMessageDiscord
                     )
                 )
             }

@@ -6,7 +6,6 @@ import tw.brilliant.server.plugins.birthdayplugin.util.Util
 import org.bukkit.OfflinePlayer
 import org.bukkit.configuration.MemorySection
 import org.bukkit.configuration.file.YamlConfiguration
-import java.util.Date
 
 object BirthdayStorage {
     private val file = Util.getFileLocation("data.yml")

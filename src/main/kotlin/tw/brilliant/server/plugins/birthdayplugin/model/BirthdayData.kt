@@ -1,6 +1,5 @@
 package tw.brilliant.server.plugins.birthdayplugin.model
 
-import tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
 import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayConfig
 import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayStorage
 import tw.brilliant.server.plugins.birthdayplugin.util.Util
@@ -86,18 +85,16 @@ data class BirthdayData(
     fun giveGift(player: Player, autoGift: Boolean) {
         val giftCommands = BirthdayConfig.giftCommands
 
-
         if (receivedGift(player)) {
             if (!autoGift) {
-                Util.sendSystemMessage(player, "&c您已經領取過生日禮物囉，別想用一些小技巧來重複領取！")
+                Util.sendSystemMessage(player, BirthdayConfig.giveGiftRepeatMessage)
             }
             return
         }
 
         if (!Util.hasAvailableSlot(player, giftCommands.filter { it.contains("minecraft:give") }.size)) {
             Util.sendSystemMessage(
-                player,
-                "&c您的背包滿了，我不能給您生日禮物 ._.，整理出空間後請使用 [/btd gift] 領取~"
+                player, BirthdayConfig.giveGiftInventoryFullMessage
             )
             return
         }
@@ -106,11 +103,10 @@ data class BirthdayData(
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), giftCommand.replace("%player%", player.name))
         }
         BirthdayStorage.set(
-            player,
-            copy(lastReceiveGift = Date(), lastReceiveIp = player.address?.address?.hostAddress)
+            player, copy(lastReceiveGift = Date(), lastReceiveIp = player.address?.address?.hostAddress)
         )
 
-        Util.sendSystemMessage(player, "&a生日快樂！這是您的生日禮物 :D")
+        Util.sendSystemMessage(player, BirthdayConfig.giveGiftMessage)
     }
 
     private fun receivedGift(player: Player): Boolean {
