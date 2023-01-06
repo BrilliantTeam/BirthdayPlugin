@@ -1,8 +1,8 @@
-package engineer.skyouo.plugins.birthdayplugin.command
+package tw.brilliant.server.plugins.birthdayplugin.command
 
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
-import engineer.skyouo.plugins.birthdayplugin.util.Util
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayConfig
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayStorage
+import tw.brilliant.server.plugins.birthdayplugin.util.Util
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 

@@ -1,6 +1,6 @@
-package engineer.skyouo.plugins.birthdayplugin.util
+package tw.brilliant.server.plugins.birthdayplugin.util
 
-import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
+import tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
 import org.bukkit.scheduler.BukkitRunnable
 
 class MinecraftAsynchronouslyTask(private val unit: () -> Unit, private var delay: Int) : BukkitRunnable() {

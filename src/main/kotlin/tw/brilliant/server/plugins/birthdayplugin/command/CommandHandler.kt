@@ -1,4 +1,4 @@
-package engineer.skyouo.plugins.birthdayplugin.command
+package tw.brilliant.server.plugins.birthdayplugin.command
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender

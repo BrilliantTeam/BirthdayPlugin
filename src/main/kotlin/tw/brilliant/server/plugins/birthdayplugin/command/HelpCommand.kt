@@ -1,4 +1,4 @@
-package engineer.skyouo.plugins.birthdayplugin.command
+package tw.brilliant.server.plugins.birthdayplugin.command
 
 import net.md_5.bungee.api.chat.ComponentBuilder
 import org.bukkit.command.Command

@@ -1,6 +1,6 @@
 name: BirthdayPlugin
 version: '${version}'
-main: engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
+main: tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
 api-version: 1.19
 authors: [ SiongSng ]
 description: 輝煌伺服器的生日插件

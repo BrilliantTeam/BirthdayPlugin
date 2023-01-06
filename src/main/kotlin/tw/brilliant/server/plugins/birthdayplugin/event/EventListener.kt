@@ -1,10 +1,10 @@
-package engineer.skyouo.plugins.birthdayplugin.event
+package tw.brilliant.server.plugins.birthdayplugin.event
 
-import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
-import engineer.skyouo.plugins.birthdayplugin.util.MinecraftAsynchronouslyTask
-import engineer.skyouo.plugins.birthdayplugin.util.Util
+import tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayConfig
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayStorage
+import tw.brilliant.server.plugins.birthdayplugin.util.MinecraftAsynchronouslyTask
+import tw.brilliant.server.plugins.birthdayplugin.util.Util
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent

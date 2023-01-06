@@ -1,9 +1,9 @@
-package engineer.skyouo.plugins.birthdayplugin
+package tw.brilliant.server.plugins.birthdayplugin
 
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayStorage
-import engineer.skyouo.plugins.birthdayplugin.event.EventListener
-import engineer.skyouo.plugins.birthdayplugin.model.BirthdayData
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayConfig
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayStorage
+import tw.brilliant.server.plugins.birthdayplugin.event.EventListener
+import tw.brilliant.server.plugins.birthdayplugin.model.BirthdayData
 import org.bukkit.Bukkit
 import org.bukkit.configuration.serialization.ConfigurationSerialization
 import org.bukkit.plugin.Plugin

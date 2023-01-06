@@ -1,8 +1,8 @@
-package engineer.skyouo.plugins.birthdayplugin.config
+package tw.brilliant.server.plugins.birthdayplugin.config
 
-import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
-import engineer.skyouo.plugins.birthdayplugin.model.BirthdayData
-import engineer.skyouo.plugins.birthdayplugin.util.Util
+import tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
+import tw.brilliant.server.plugins.birthdayplugin.model.BirthdayData
+import tw.brilliant.server.plugins.birthdayplugin.util.Util
 import org.bukkit.OfflinePlayer
 import org.bukkit.configuration.MemorySection
 import org.bukkit.configuration.file.YamlConfiguration

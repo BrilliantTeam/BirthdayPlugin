@@ -1,7 +1,7 @@
-package engineer.skyouo.plugins.birthdayplugin.util
+package tw.brilliant.server.plugins.birthdayplugin.util
 
-import engineer.skyouo.plugins.birthdayplugin.BirthdayPlugin
-import engineer.skyouo.plugins.birthdayplugin.config.BirthdayConfig
+import tw.brilliant.server.plugins.birthdayplugin.BirthdayPlugin
+import tw.brilliant.server.plugins.birthdayplugin.config.BirthdayConfig
 import me.clip.placeholderapi.PlaceholderAPI
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder

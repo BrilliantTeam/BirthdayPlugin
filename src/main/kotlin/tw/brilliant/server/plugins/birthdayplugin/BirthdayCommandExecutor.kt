@@ -1,7 +1,7 @@
-package engineer.skyouo.plugins.birthdayplugin
+package tw.brilliant.server.plugins.birthdayplugin
 
-import engineer.skyouo.plugins.birthdayplugin.command.*
-import engineer.skyouo.plugins.birthdayplugin.model.BirthdayCommand
+import tw.brilliant.server.plugins.birthdayplugin.command.*
+import tw.brilliant.server.plugins.birthdayplugin.model.BirthdayCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
