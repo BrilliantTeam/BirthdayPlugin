@@ -16,7 +16,7 @@ class SwitchAnnouncementCommand : CommandHandler() {
         when (value) {
             "on" -> {
                 BirthdayStorage.set(sender, birthday.copy(announcement = true))
-                Util.sendSystemMessage(sender, §a已啟用§7全伺服器生日祝福。")
+                Util.sendSystemMessage(sender, "§a已啟用§7全伺服器生日祝福。")
             }
 
             "off" -> {
