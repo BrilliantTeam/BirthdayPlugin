@@ -8,7 +8,7 @@ import org.bukkit.entity.Player
 
 class GiftCommand : CommandHandler() {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>) {
-        if (sender !is Player) return Util.sendSystemMessage(sender, "&c此指令只能在遊戲內使用")
+        if (sender !is Player) return Util.sendSystemMessage(sender, "§7｜§6系統§7｜§f飯娘：§7此指令只能在遊戲內使用")
 
         val birthday = BirthdayStorage.get(sender)
 
@@ -16,13 +16,13 @@ class GiftCommand : CommandHandler() {
             if (birthday.canGiveGift(sender.isOp)) {
                 birthday.giveGift(sender, false)
             } else {
-                Util.sendSystemMessage(sender, "&c您已經領取過生日禮包囉~")
+                Util.sendSystemMessage(sender, "§7｜§6系統§7｜§f飯娘：§7您已經領取過生日禮包囉~")
             }
         } else {
             if (birthday.calendar != null) {
-                Util.sendSystemMessage(sender, "&c領取生日禮包失敗，今天不是您的生日喔~")
+                Util.sendSystemMessage(sender, "§7｜§6系統§7｜§f飯娘：§7領取生日禮包失敗，今天不是您的生日喔~")
             } else {
-                Util.sendSystemMessage(sender, "&c領取生日禮包失敗，您尚未設定生日")
+                Util.sendSystemMessage(sender, "§7｜§6系統§7｜§f飯娘：§7領取生日禮包失敗，您尚未設定生日")
             }
         }
     }

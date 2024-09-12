@@ -30,7 +30,7 @@ class BirthdayPlugin : JavaPlugin() {
             LOGGER.severe("Command btd is not found")
         } else {
             birthdayCommand.setExecutor(BirthdayCommandExecutor())
-            birthdayCommand.description = "輝煌伺服器生日系統指令 (btd /help)"
+            birthdayCommand.description = "輝煌伺服器生日系統指令（/btd help）"
             LOGGER.info("Register btd command successful")
         }
 

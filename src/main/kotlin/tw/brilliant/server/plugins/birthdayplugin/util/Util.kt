@@ -28,7 +28,7 @@ object Util {
     }
 
     private fun getSystemMessage(message: String): Array<BaseComponent> {
-        return ComponentBuilder(ChatColor.translateAlternateColorCodes('&', "&7[&6系統&7] &f飯娘：&7$message")).create()
+        return ComponentBuilder(ChatColor.translateAlternateColorCodes('&', "§7｜§6系統§7｜§f飯娘：§7$message")).create()
     }
 
     fun sendSystemMessage(sender: CommandSender, message: String) {
