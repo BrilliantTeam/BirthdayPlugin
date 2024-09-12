@@ -63,7 +63,7 @@ class SetCommand : CommandHandler() {
                 )
             }
         } else {
-            Util.sendSystemMessage(sender, "§7｜§6系統§7｜§f飯娘：§7"設定生日失敗，請檢查輸入的日期格式是否正確（請輸入 [/btd help] 查看用法）")
+            Util.sendSystemMessage(sender, "§7｜§6系統§7｜§f飯娘：§7設定生日失敗，請檢查輸入的日期格式是否正確（請輸入 [/btd help] 查看用法）")
         }
     }
 }
