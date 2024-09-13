@@ -15,39 +15,39 @@ object BirthdayConfig {
         get() = configuration.getBoolean("discord_srv", true)
 
     val joinServerGiftDelay: Int
-        get() = configuration.getInt("join_server_gift_delay", 0)
+        get() = configuration.getInt("join_server_gift_delay", 10)
 
     val giveGiftMessage: String
-        get() = configuration.getString("give_gift_message", "&aHappy birthday! Here is your gift!")!!
+        get() = configuration.getString("give_gift_message", "&7｜&6系統&7｜&f飯娘：&7輝煌伺服器祝您生日快樂！已將生日小禮品放到您的背包囉！")!!
 
     val giveGiftInventoryFullMessage: String
         get() = configuration.getString(
             "give_gift_inventory_full_message",
-            "&cYour inventory is full, I can't give you a birthday gift. Please use [/btd gift] to get after sorting out the inventory."
+            "&7｜&6系統&7｜&f飯娘：&7輝煌伺服器祝您生日快樂！但是您的背包滿了，請清理後輸入&e[/btd gift]&7再領取生日小禮品！"
         )!!
 
     val giveGiftRepeatMessage: String
         get() = configuration.getString(
             "give_gift_repeat_message",
-            "&cYou have already received your birthday gift today. Don't try to use some tricks to get it again!"
+            "&7｜&6系統&7｜&f飯娘：&7您已經領取過生日禮物了呢！"
         )!!
 
     val personalGreetingsMessage: String
         get() = configuration.getString(
             "server_greetings_message",
-            "&aWe wish you a happy birthday! &7(You can use [/btd gs off] to turn off personal greetings)"
+            "&7｜&6系統&7｜&f飯娘：&7輝煌伺服器祝您生日快樂！感謝您遊玩輝煌！&8（可使用&e[/btd gs off]&8關閉生日通知）"
         )!!
 
     val serverAnnouncementMessage: String
         get() = configuration.getString(
             "server_announcement_message",
-            "&6Today is %playerTitle_use% &a%essentials_nickname% &6's birthday, wish him/her a happy birthday! &7(You can use [/btd at off] to turn off server announcements)"
+            "&7｜&6系統&7｜&f飯娘：&7今天是 %tab_tabsuffix% 的生日，祝他生日快樂吧！&8（可使用&e[/btd at off]&8關閉生日通知）"
         )!!
 
     val serverAnnouncementMessageDiscord: String
         get() = configuration.getString(
             "server_announcement_message_discord",
-            "Today is %playerTitle_use% %essentials_nickname% 's birthday, wish him/her a happy birthday!`"
+            "> -# 今天是 [%playerTitle_use%] %tab_tabsuffix% 的生日，祝他生日快樂吧！ <@&1283751877389058109>"
         )!!
 
     fun init() {
